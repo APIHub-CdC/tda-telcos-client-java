@@ -1,11 +1,7 @@
 package io.TelcosDataAgregation.client.model;
 
 import java.util.Objects;
-import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
 import java.util.UUID;
 import org.threeten.bp.OffsetDateTime;
 
@@ -17,51 +13,8 @@ public class AckTelcosDataAggregation {
   @SerializedName("dateTime")
   private OffsetDateTime dateTime = null;
 
-  public enum OperationEnum {
-    REQUEST("request"),
-    
-    CONSUMPTION("consumption");
-
-    private String value;
-
-    OperationEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static OperationEnum fromValue(String text) {
-      for (OperationEnum b : OperationEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-
-    public static class Adapter extends TypeAdapter<OperationEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final OperationEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public OperationEnum read(final JsonReader jsonReader) throws IOException {
-        String value = jsonReader.nextString();
-        return OperationEnum.fromValue(String.valueOf(value));
-      }
-    }
-  }
-
   @SerializedName("operation")
-  private OperationEnum operation = null;
+  private String operation = null;
 
   @SerializedName("message")
   private String message = null;
@@ -80,7 +33,7 @@ public class AckTelcosDataAggregation {
     return dateTime;
   }
 
-  public OperationEnum getOperation() {
+  public String getOperation() {
     return operation;
   }
 
